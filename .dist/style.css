@@ -1,0 +1,191 @@
+/* ---------- Base Resets ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #86BCBD, #A4CE8B);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ---------- Heading ---------- */
+.main-heading {
+    margin-bottom: 30px;
+    font-size: 70px;
+    color: #BA5A5A;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 #F7E49B, 4px 4px 10px rgba(0,0,0,.18);
+    transition: .3s;
+}
+
+.main-heading:hover {
+    transform: translateY(-3px);
+}
+
+/* ---------- Main Layout ---------- */
+.main {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+/* ---------- Ordinary Board Layout ---------- */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    background: transparent;
+    padding: 10px;
+}
+
+/* ---------- Classic Line Grid System ---------- */
+.cell {
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 52px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+    border: 3px solid #BA5A5A; 
+}
+
+/* Grid Line Trimming Selectors */
+.cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) { border-top: none; }
+.cell:nth-child(3n+1) { border-left: none; }
+.cell:nth-child(3n) { border-right: none; }
+.cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) { border-bottom: none; }
+
+.cell:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Player Token Assignments */
+.cell.x { color: #BA5A5A; }
+.cell.o { color: #2F6F6F; }
+
+.cell.win {
+    font-size: 65px;   /* Increase from your normal 52px */
+    color: #BA5A5A;
+    transition: 0.2s;
+    background-color: #8ecc7d;
+}
+/* ---------- Side Panel & Status ---------- */
+.game-info {
+    width: 220px;
+    background: rgba(255, 255, 255, .25);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    text-align: center;
+}
+
+#status {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #BA5A5A;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.players {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-badge {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.4);
+    text-align: left;
+}
+.x-badge { border-left: 4px solid #BA5A5A; color: #BA5A5A; }
+.o-badge { border-left: 4px solid #2F6F6F; color: #2F6F6F; }
+
+/* ---------- Buttons ---------- */
+.restart-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #BA5A5A;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.restart-btn:hover {
+    background: #9d4a4a;
+    transform: scale(1.02);
+}
+
+.restart-btn:active {
+    transform: scale(0.97);
+}
+
+/* ---------- Massive Win Screen Overlay ---------- */
+.win-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(208, 216, 216, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.win-screen h1 {
+    font-size: 90px;
+    color: #BA5A5A;
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.win-screen #playAgain {
+    width: 220px;
+    font-size: 20px;
+    padding: 15px;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.05);
+}
+
+@keyframes bounceIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
